@@ -1,0 +1,33 @@
+Creando el CMS Module
+
+    > ng g c website/components/layout
+CREATE src/app/website/components/layout/layout.component.html (21 bytes)
+CREATE src/app/website/components/layout/layout.component.spec.ts (599 bytes)
+CREATE src/app/website/components/layout/layout.component.ts (203 bytes)
+CREATE src/app/website/components/layout/layout.component.scss (0 bytes)
+UPDATE src/app/app.module.ts (2644 bytes)
+
+    > ng g m cms --routing
+CREATE src/app/cms/cms-routing.module.ts (246 bytes)
+CREATE src/app/cms/cms.module.ts (268 bytes)
+
+    > ng g c cms/pages/tasks
+CREATE src/app/cms/pages/tasks/tasks.component.html (20 bytes)
+CREATE src/app/cms/pages/tasks/tasks.component.spec.ts (592 bytes)
+CREATE src/app/cms/pages/tasks/tasks.component.ts (199 bytes)
+CREATE src/app/cms/pages/tasks/tasks.component.scss (0 bytes)
+UPDATE src/app/cms/cms.module.ts (354 bytes)
+
+    > ng g c cms/pages/grid
+CREATE src/app/cms/pages/grid/grid.component.html (19 bytes)
+CREATE src/app/cms/pages/grid/grid.component.spec.ts (585 bytes)
+CREATE src/app/cms/pages/grid/grid.component.ts (195 bytes)
+CREATE src/app/cms/pages/grid/grid.component.scss (0 bytes)
+UPDATE src/app/cms/cms.module.ts (434 bytes)
+
+    > ng g c cms/components/layout
+CREATE src/app/cms/components/layout/layout.component.html (21 bytes)
+CREATE src/app/cms/components/layout/layout.component.spec.ts (599 bytes)
+CREATE src/app/cms/components/layout/layout.component.ts (203 bytes)
+CREATE src/app/cms/components/layout/layout.component.scss (0 bytes)
+UPDATE src/app/cms/cms.module.ts (527 bytes)

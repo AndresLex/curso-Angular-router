@@ -1,0 +1,28 @@
+Creando en Website Module
+
+Un Website típico suele tener una página “home”, una página de “nosotros”, una página de “términos y condiciones”, entre otras páginas triviales.
+
+Reto para crear tu propio website con Angular
+El reto para ti es crear tu propio website con Angular y modularizar la aplicación.
+
+Recuerda, para que la aplicación esté correctamente modularizada, debes importar las rutas a tus módulos de forma asíncrona de la siguiente manera.
+
+            // app-routing.module.ts
+            const routes: Routes = [
+            {
+                path: '',
+                loadChildren: () => import('./modules/website/website.module').then(m => m.WebsiteModule)
+            },
+            {
+                path: 'cms',
+                loadChildren: () => import('./modules/cms/cms.module').then(m => m.CmsModule)
+            }
+            ];
+
+            @NgModule({
+            imports: [RouterModule.forRoot(routes)],
+            exports: [RouterModule]
+            })
+            export class AppRoutingModule { }
+
+Crea una regla en tus rutas por cada módulo para que el código Javascript se cargue dinámicamente cuando el usuario lo solicita.

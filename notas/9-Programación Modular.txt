@@ -1,0 +1,33 @@
+Programación Modular
+
+Para activar las técnicas de Lazy Loading y CodeSplitting en Angular tienes que construir tus aplicaciones de forma modular.
+
+Cuáles son los módulos en Angular
+Por defecto, Angular posee un solo módulo en el archivo app.module.ts. Todos tus componentes, servicios, pipe, etc. se importan aquí. Utiliza un decorador llamado @ngModule() con un aspecto similar al siguiente:
+
+            // app.module.ts
+            @NgModule({
+            imports: [],         // Imports de otros módulos.
+            declarations: [],    // Imports de los componentes del módulo.
+            exports: [],         // Exports de componentes u otros para ser utilizados en otros módulos.
+            providers: [],       // Inyección de servicios.
+            bootstrap: []        // Import del componente principal de la aplicación.
+            })
+            export class AppModule { }
+
+Al modularizar una aplicación, cada módulo tendrá sus componentes exclusivos, servicios o los archivos que fuesen a necesitar.
+
+Tipos de Módulos en Angular
+
+Podemos identificar varios tipos de módulos. El AppModule es el módulo raíz que da inicio a tu aplicación. Existen los Routing Modules para la definición de rutas.
+
+El Shared Module que posee servicios o componentes compartidos por toda la aplicación. El Feature/Domain Module que son módulos propios de tu aplicación.
+
+De esta manera, Angular construye un ecosistema de módulos, pudiendo dividir una APP en N partes para optimizar el rendimiento y mantener un orden en el código fuente para que sea comprensible y escalable.
+
+Tipos de Módulos:
+Root Module: modulo por defecto de angluar
+Core Module: son servicios que pueden ser usados en diferentes módulos y componentes recordar que los servicios que se inyecta en el provideIn : ‘root’ se puede usar en cualquier parte.
+Routing Module: son módulos especiales que declaran un enrutamiento de la aplicación
+Feature Domain Module:son los módulos específicos del negocio
+Shared Module:Se usan para componentes pipes y directivas que se quieran usar en toda la aplicación

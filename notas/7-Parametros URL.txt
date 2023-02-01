@@ -1,0 +1,42 @@
+Parametros URL
+
+Una característica sobre las URL es la posibilidad de transportar información opcional a través de parámetros de consulta.
+
+Query Params
+Los parámetros de ruta, por ejemplo /catalogo/:categoryId, son obligatorios. Sin el ID la ruta no funcionaría. Por otro lado, existen los parámetros de consulta que los reconocerás seguidos de un ? y separados por un &, por ejemplo /catalogo?limit=10&offset=0.
+
+1. Creando rutas con parámetros
+Para crear rutas con este tipo de parámetros, utiliza la directiva queryParams propia de Angular de la siguiente manera.
+
+            <div class="header-right hidde-menu">
+                <a routerLink="/catalogo" [queryParams]="{ category: 'electronica' }" routerLinkActive="active">Electrónica</a>
+            </div>
+
+La directiva queryParams recibe un objeto y creará la ruta /catalogo?category=electronica.
+
+2. Capturar parámetros en las rutas
+Para capturar estos datos en el componente, es aconsejable realizarlo en el hook de ciclo de vida ngOnInit().
+
+            // modules/website/component/catalogo/catalogo.component.ts
+            import { ActivatedRoute, Params } from '@angular/router';
+
+            @Component({
+            selector: 'app-catalogo',
+            templateUrl: './catalogo.component.html',
+            styleUrls: ['./catalogo.component.scss']
+            })
+            export class CatalogoComponent implements OnInit {
+
+            constructor(private route: ActivatedRoute) { }
+
+            ngOnInit(): void {
+                this.route.queryParams
+                .subscribe((params: Params) => {
+                    console.log(params.category);
+                });
+            }
+            }
+
+Suscribiéndote a queryParams, podrás capturar y hacer uso de esta información.
+
+Recuerda que estos parámetros suelen no ser obligatorios, tu aplicación debería seguir funcionando si los mismos no existen.

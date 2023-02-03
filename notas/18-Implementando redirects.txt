@@ -1,0 +1,42 @@
+Implementando redirects
+
+Los Guards se encargan de permitir el ingreso o no de los usuarios a las rutas. Cuando un usuario no tiene acceso, es una buena práctica informarle qué está pasando y por qué no está entrando a una ruta.
+
+Cómo redireccionar desde un Guard
+Para mejorar la experiencia de usuario, cuando no se tiene permisos para ingresar a X ruta, es recomendable redireccionar al usuario a la home de la aplicación o a alguna otra página pertinente.
+
+Para esto, inyecta el servicio Router importándolo desde @angular/router en el Guard para realizar una redirección.
+
+            // modules/shared/guards/admin.guard.ts
+            import { Injectable } from '@angular/core';
+            import { Router } from '@angular/router';
+            import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+            import { Observable } from 'rxjs';
+
+            @Injectable({
+            providedIn: 'root'
+            })
+            export class AdminGuard implements CanActivate {
+
+            constructor(private router: Router) {}
+
+            canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+                // Lógica para determinar si el usuario tiene permisos o no.
+                let allow = true;
+                
+                if (!allow)
+                this.router.navigate(['/home']);
+                return allow;
+            }
+
+            }
+
+Así es como puedes crear la lógica que necesites en tus Guards. Cuando el usuario no tenga permisos de acceso, redireccionarlo a otra página para que no quede en una página en blanco.
+
+Guards
+Los Guards en Angular, son de alguna manera: middlewares que se ejecutan antes de cargar una ruta y determinan si se puede cargar dicha ruta o no. Existen 4 tipos diferentes de Guards (o combinaciones de estos) que son los siguientes:
+
+(CanActivate) Antes de cargar los componentes de la ruta.
+(CanLoad) Antes de cargar los recursos (assets) de la ruta.
+(CanDeactivate) Antes de intentar salir de la ruta actual (usualmente utilizado para evitar salir de una ruta, si no se han guardado los datos).
+(CanActivateChild) Antes de cargar las rutas hijas de la ruta actual.

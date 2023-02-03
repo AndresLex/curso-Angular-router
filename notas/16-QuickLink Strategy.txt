@@ -1,0 +1,51 @@
+QuickLink Strategy
+
+Puedes optar entre precargar todos los módulos con Lazy Loading, o seleccionar los que a ti te parecen los más importantes que el usuario necesitará. Justamente ese es un inconveniente con esta técnica, no tiene en cuenta al usuario.
+
+Veamos otra forma de precargar módulos teniendo en cuenta al mismo.
+
+Cómo hacer precarga de módulos en pantalla
+La estrategia de pregarga de módulos QuickLink utiliza la API nativa del navegador Intersection Observer API para observar el viewport de la pantalla y solo precargar los módulos cuyos enlaces hacia ellos estén visibles.
+
+En otras palabras, si en pantalla hay un enlace visible que redirecciona a un módulo en particular, este será precargado.
+
+Puede ocurrir que un usuario administrador, tenga a disposición todos los módulos de la aplicación. Pero que un usuario con menor privilegio solo podrá acceder a unos pocos módulos y no tiene sentido que precargue todos.
+
+1. Instalando la dependencia
+Para activar esta estrategia, instala la dependencia ngx-quicklink con npm i ngx-quicklink --save.
+
+2. Importando el módulo
+Importa el módulo QuicklinkModule, en el módulo principal de tu aplicación.
+
+            // app.module.ts
+            import { QuicklinkModule } from 'ngx-quicklink'
+
+            @NgModule({
+            imports: [
+                // ..
+                QuicklinkModule
+            ],
+            })
+            export class AppModule { }
+
+3. Importando la estrategia
+Importa la estrategia en el routing de la aplicación.
+
+            // app-routing.module.ts
+            import { QuicklinkStrategy } from 'ngx-quicklink'
+
+            // ..
+
+            @NgModule({
+            imports: [RouterModule.forRoot(routes, {
+                preloadingStrategy: QuicklinkStrategy
+            })],
+            exports: [RouterModule]
+            })
+            export class AppRoutingModule { }
+
+También, muy importante, importa el módulo QuicklinkModule en cada uno de los módulos de tu aplicación que quieras que sea precargado.
+
+TIP: Puedes importar QuicklinkModule en el SharedModule si deseas no tener que hacerlo módulo por módulo y solo lo haces en el módulo compartido.
+
+Ahora si, podrás observar que solo los módulos visibles en el viewport se precargan, ignorando los que el usuario no necesitará.

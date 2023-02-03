@@ -1,0 +1,31 @@
+Precarga de módulos
+
+Modularizar una aplicación nos beneficia en rendimiento gracias a las técnicas de Lazy Loading y CodeSplitting pero… ¿Funciona realmente? ¿El rendimiento de mi app será el óptimo?
+
+Diferencias entre hacer CodeSplitting y sin CodeSplitting
+Al realizar un ng serve, SIN CodeSplitting, puedes observar en la consola algo como lo siguiente:
+
+Build app sin CodeSplitting.png
+Mientras que al realizarlo luego de haber modularizado la app se observa lo siguiente:
+
+Build app con CodeSplitting.png
+En la primera imagen, toda tu aplicación se agrupa en el main.js y en la segunda, luego de modularizar, se crea un “Chunk” por cada módulo que tenga la app.
+
+Hasta aquí ya puedes observar la diferencia en el tamaño de los archivos. Si bien estamos compilando la aplicación en modo desarrollo. En modo producción se comprime aún más y pesarán menos los archivos.
+
+Diferencias entre hacer Lazy Loading y sin Lazy Loading
+Al ingresar a tu aplicación desde el navegador, utiliza las herramientas de desarrollo que proveen para inspeccionar la red.
+
+Sin Lazy Loading, solo se puede observar el archivo main.js que contiene toda tu aplicación.
+
+App sin Lazy Loading.png
+Con Lazy Loading, puedes observar que se desprende un nuevo archivo llamado src_app_modules_website_website_module_ts.js el cual contiene el módulo Website.
+
+App con Lazy Loading 1.png
+Te preguntarás, ¿dónde están los archivos correspondientes a mis otros módulos?
+Redirecciónate a una ruta de tus otros módulos para observar como se carga dinamicamente el archivo Javascript.
+
+App sin Lazy Loading 2.png
+Esa es la magia del Lazy Loading. Has logrado que tu aplicación cargue en N cantidad de partes, reduciendo el peso de la misma y mejorando su velocidad de renderizado.
+
+Y seguro has entendido mejor lo que es Lazy Loading, CodeSplitting y cómo trabajan juntos.
